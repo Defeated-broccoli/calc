@@ -68,11 +68,10 @@ body {
   transform: translateY(2px);
 }
 
-.button__disabled {
+.button:disabled {
   box-shadow: 0 3px #666;
   transform: translateY(2px);
   color: black;
-  background-color: s;
 }
 
 .button__blue {
@@ -90,7 +89,7 @@ body {
 
 .logo {
   padding: 10px;
-  width: 100px;
+  width: min(100px, 15vw);
   background-color: rgba(245, 245, 245, 0.659);
   border-radius: 4px;
   border: 1px solid black;

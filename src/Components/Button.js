@@ -1,8 +1,10 @@
 import React from 'react'
 
 const Button = ({ value, activeCurrency, onClick }) => {
-  let cssClass = activeCurrency === value ? 'button button__disabled' : 'button'
+  let cssClass = 'button'
 
+  //buttons are generated dynamically, so if we wan't to color only some buttons, we need to do it here
+  //can also be done by key
   if (value === '+' || value === '-' || value === '*' || value === '/') {
     cssClass += ' button__blue'
   }
