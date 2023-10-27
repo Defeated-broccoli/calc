@@ -19,6 +19,7 @@ const crtValues = ['PLN', 'EUR', 'USD', 'GBP']
 function App() {
   const [screenValue, setScreenValue] = useState('')
   const [currency, setCurrency] = useState('PLN')
+  const [currencyLabel, setCurrencyLabel] = useState('PLN')
 
   //invokes api call which fetches entire response body
   const getExchangeData = async (code) => {
@@ -60,7 +61,7 @@ function App() {
             !screenValue.endsWith('/') &&
             !screenValue.endsWith('.')
           )
-            setScreenValue(screenValue + char)
+            setScreenValue(screenValue + char + '')
           break
         case '/':
           if (
@@ -70,7 +71,7 @@ function App() {
             !screenValue.endsWith('/') &&
             !screenValue.endsWith('.')
           )
-            setScreenValue(screenValue + char)
+            setScreenValue(screenValue + char + '')
           break
         case '+':
           if (
@@ -80,7 +81,7 @@ function App() {
             !screenValue.endsWith('/') &&
             !screenValue.endsWith('.')
           )
-            setScreenValue(screenValue + char)
+            setScreenValue(screenValue + char + '')
           break
         case '-':
           if (
@@ -90,7 +91,7 @@ function App() {
             !screenValue.endsWith('/') &&
             !screenValue.endsWith('.')
           )
-            setScreenValue(screenValue + char)
+            setScreenValue(screenValue + char + '')
           break
         case '.':
           if (
@@ -100,10 +101,10 @@ function App() {
             !screenValue.endsWith('/') &&
             !screenValue.endsWith('.')
           )
-            setScreenValue(screenValue + char)
+            setScreenValue(screenValue + char + '')
           break
         default:
-          setScreenValue(screenValue + char)
+          setScreenValue(screenValue + char + '')
       }
     } catch (error) {
       console.log(error)
@@ -112,13 +113,14 @@ function App() {
 
   //here we handle all conversions
   const handleConversionClick = async (code) => {
+    setCurrencyLabel(code)
     const currentCurrencyToPLN =
       currency === 'PLN' ? 1 : await getExchangeData(currency)
     const newCurrencyToPLN = code === 'PLN' ? 1 : await getExchangeData(code)
 
     //logic here is that, since we have only converting rates to and from PLN, we want to always get back to PLN in the middle of changing between two foreign currencies
     setScreenValue(
-      (eval(screenValue) / currentCurrencyToPLN) * newCurrencyToPLN
+      (eval(screenValue) * currentCurrencyToPLN) / newCurrencyToPLN + ''
     )
     setCurrency(code)
   }
@@ -126,7 +128,7 @@ function App() {
     <div className="App">
       <Card>
         <Logo text="SERD" />
-        <Screen value={screenValue} />
+        <Screen screenValue={screenValue} currencyValue={currencyLabel} />
         <Buttons className="buttons">
           {btnValues.flat().map((btn, i) => (
             <Button
