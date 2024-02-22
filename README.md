@@ -1,3 +1,6 @@
+#Info
+Yeah, so it's a calculator. I know, not impressive, but since I jumped over vanilla react straight to react native, I'll keep it as a proof I can do react. 
+
 # Getting Started with Create React App
 
 //leaving here as it can be usefull to start project
